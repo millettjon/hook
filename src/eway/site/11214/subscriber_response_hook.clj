@@ -20,7 +20,7 @@
             :p     "srv"
             :tv    "no-js"
             :se_ca "lead"
-            :se_ac :action
+            :se_ac :status
             :se_la :email
             :se_pr [[:text18 :rti] #(str "subid-" %1 "|rti-" %2)]
             :aid   "cp_lead_tracker"}})
@@ -50,9 +50,8 @@
   (let [params (build-params endpoint data)]
     (client/get url (merge default-http-options
                            {:query-params params}))
-    #_ (client/post url {:form-params params})
-    #_ (client/put url {:form-params params})
-    ))
+    #_ (client/post url (merge default-http-options
+                            {:form-params params}))))
 
 #_ (let [data {:action "signup"
                :email "jon@example.com"
@@ -134,27 +133,32 @@
 ;; MAIN PROCESSING LOOP
 ;; ==================================================
 
-(defn -main
-  [& _]
-  (info "Starting")
+(defn process-new-rows
+  []
   (let [[get-id set-id] (init-riak)
         id (get-id)
         rows (get-subscriber-responses {:subscriber_response_id id})]
     (info "Starting id:" id)
     (doseq [row rows]
       ;; process row
-      #_ (call-hook endpoint row)
+      ;; (call-hook endpoint row)
       ;; (println "--------------------------------------------------")
       ;; (pprint row)
       (set-id (row :subscriberresponseid))
       #_ (Thread/sleep 1000))
     (info "Final id:" (get-id))
-    (info "Processed" (count rows) "rows.")
-    (info "Exiting")
-    (System/exit 0)))
-#_ (-main)
+    (info "Processed" (count rows) "rows.")))
+#_ (process-new-rows)
 
-;; TODO: select HTTP request method
+(defn -main
+  [& _]
+  (info "Starting")
+  (process-new-rows)
+  (info "Exiting")
+  (System/exit 0))
+
+;; TODO: confirm if should use get or post
+;; TODO: test that http client sends correct data
 ;; TODO: alert on errors (postal?)
 ;; TODO: add unit tests
 ;; TODO: log (as data) elapsed time and total rows processed
