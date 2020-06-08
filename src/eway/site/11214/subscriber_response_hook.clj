@@ -134,11 +134,12 @@
 ;; MAIN PROCESSING LOOP
 ;; ==================================================
 
-(defn main-
-  []
+(defn -main
+  [& _]
+  (info "Starting")
   (let [[get-id set-id] (init-riak)
         id (get-id)
-        rows (get-subscriber-response {:subscriber_response_id id})]
+        rows (get-subscriber-responses {:subscriber_response_id id})]
     (info "Starting id:" id)
     (doseq [row rows]
       ;; process row
@@ -148,14 +149,16 @@
       (set-id (row :subscriberresponseid))
       #_ (Thread/sleep 1000))
     (info "Final id:" (get-id))
-    (info "Processed" (count rows) "rows.")))
-#_ (main-)
+    (info "Processed" (count rows) "rows.")
+    (info "Exiting")
+    (System/exit 0)))
+#_ (-main)
 
 ;; TODO: select HTTP request method
 ;; TODO: alert on errors (postal?)
 ;; TODO: add unit tests
 ;; TODO: log (as data) elapsed time and total rows processed
-;; TODO: configure clj-kondo to understand defquery
+;; TODO: Fix warning: update already refers to: #'clojure.core/update in namespace: clojurewerkz.welle.buckets, being replaced by: #'clojurewerkz.welle.buckets/update
 ;; TODO: handle exceptions (http, tcp conn/timeout, database, riak)
 ;; TODO: configure logging
 ;; TODO: configure http-client to discard cookies to silence bad cookie warning

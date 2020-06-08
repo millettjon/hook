@@ -15,20 +15,15 @@
          ;; Note: hd to hand locate ojdbc8 jar at:
          ;; https://repo1.maven.org/maven2/com/oracle/ojdbc/ojdbc8/
          com.oracle.ojdbc/ojdbc8 {:mvn/version "19.3.0.0"}
-         ;; seancorfield/next.jdbc    {:mvn/version "1.0.462"} ; clojure jdbc
-         ;; com.zaxxer/HikariCP       {:mvn/version "3.4.5"}   ; connection pool
-         ;; com.layerware/hugsql      {:mvn/version "0.5.1"}
-         ;; com.layerware/hugsql-core {:mvn/version "0.5.1"}   ; sql builder
-         ;; com.layerware/hugsql-adapter-next-jdbc {:mvn/version "0.5.1"}
          yesql                   {:mvn/version "0.5.3"}
 
-         ;; miscellaneous
+         ;; other
          clj-http              {:mvn/version "3.10.1"} ; http client
          fipp                  {:mvn/version "0.6.23"} ; pretty printer
          com.novemberain/welle {:mvn/version "3.0.0"}  ; riak client
          }
 
- :aliases {:hook {:main-opts ["-m" "eway.site.core"]}
+ :aliases {:run {:main-opts ["-m" "eway.site.11214.subscriber-response-hook"]}
 
            ;; common test deps
            :test {:extra-paths ["test"]
