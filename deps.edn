@@ -7,9 +7,18 @@
 {:paths ["src"]
  :deps  {org.clojure/clojure {:mvn/version "1.10.1"}
 
+         ;; building systems from components
+         com.stuartsierra/component {:mvn/version "1.0.0"}
+
          ;; logging
+         ;; See: https://lambdaisland.com/blog/2020-06-12-logging-in-clojure-making-sense-of-the-mess
          com.taoensso/timbre       {:mvn/version "4.10.0"}
          com.fzakaria/slf4j-timbre {:mvn/version "0.3.19"} ; redirect slf4j to timbre
+
+         ;; Exclude slf4j-nop to fix a warning about multiple slf4j bindings.
+         ;; Note: Can be removed once tools.deps removes slf4j-nop as a dependency.
+         org.clojure/tools.deps.alpha {:mvn/version "0.8.695"
+                                       :exclusions  [org.slf4j/slf4j-nop]}
 
          ;; database
          ;; Note: hd to hand locate ojdbc8 jar at:
@@ -18,16 +27,21 @@
          yesql                   {:mvn/version "0.5.3"}
 
          ;; other
-         clj-http              {:mvn/version "3.10.1"} ; http client
-         fipp                  {:mvn/version "0.6.23"} ; pretty printer
-         com.novemberain/welle {:mvn/version "3.0.0"}  ; riak client
+         io.forward/yaml       {:mvn/version "1.0.10"}       ; read/write yaml
+         diehard               {:mvn/version "0.10.0"}       ; retries and rate limits
+         clj-http              {:mvn/version "3.10.1"}       ; http client
+         fipp                  {:mvn/version "0.6.23"}       ; pretty printer
+         com.novemberain/welle {:mvn/version "3.0.0"}        ; riak client
+         tick                  {:mvn/version "0.4.23-alpha"} ; time
+         clansi                {:mvn/version "1.0.0"}        ; ansi colors
+         toyokumo/tarayo       {:mvn/version "0.2.2"}        ; send email
          }
 
  :aliases {:run {:main-opts ["-m" "eway.site.11214.subscriber-response-hook"]}
 
            ;; common test deps
            :test {:extra-paths ["test"]
-                  :extra-deps  {toyokumo/tarayo {:mvn/version "0.2.1"}}}
+                  :extra-deps  {clj-http-fake {:mvn/version "1.0.3"}}}
 
            ;; development repl
            :nrepl {:extra-deps {nrepl             {:mvn/version "0.7.0"}

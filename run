@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Change to proper directory.
+PROJECT_HOME="$(cd $(dirname $BASH_SOURCE); pwd)"
+cd $PROJECT_HOME
+
+# Build argument list.
+CMD=(clojure
+    --main
+    eway.site.11214.subscriber-response-hook)
+
+# Configure profile (prod or dev)
+#export EWAY_PROFILE=dev
+export EWAY_PROFILE=prod
+
+# Run using nix-shell
+nix-shell --run "${CMD[*]}"
