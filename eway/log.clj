@@ -5,7 +5,7 @@
             [taoensso.encore :as enc]
             [clojure.string :as str]
             [clojure.java.io :as io]
-            [clojure.set :as set]
+            [eway.path :as path]
             [tick.alpha.api :as tick]
             [tick.format]
             [clansi]
@@ -80,24 +80,19 @@
                        ;; TODO: What is this fn for?
                        ))})
 
-(def mail-config
-  {:host "mx.ewaydirect.com"
-   :from ""}
-
-  ;; # default address to mail on alert
-  ;; alert.mail_to: techteam@ewayops.net
-
-  ;; # default address to send pages to
-  ;; alert.pager_to: techpager@ewayops.net
-  )
-
 #_ (def no-color-output
   (partial t/default-output-fn {:stacktrace-fonts {}}))
 
 (def no-color-output
   (partial t/default-output-fn {:stacktrace-fonts {}}))
 
-;; TODO: Read defaults from /opt/eway/etc/default.conf, etc/default.edn, and *ns*.edn
+(defn build-subject
+  [ns level]
+  (str (str/upper-case (name level)) " "
+       (-> ns
+           (str/replace #"^eway\." "")
+           (str/replace #"\.cli$" ""))))
+
 ;; TODO: Get rate limiting working.
 ;; TODO: Add rollup ability.
 (defn email-appender
@@ -110,16 +105,15 @@
    :min-level  :warn ; elevated
    :rate-limit [[5 (enc/ms :mins 2)]]
    :output-fn  no-color-output
-   :fn         (fn [{:keys [msg_ hostname_ level ?ns-str ?line]}]
-                 ;;(prn "msg_" (force msg_))
+   :fn         (fn [{:keys [msg_ hostname_ level ?ns-str ?line vargs]}]
                  (with-open [conn (tarayo/connect {:host host :port port})]
                    (let [hostname (force hostname_)]
                      (try
                        (tarayo/send! conn {:from    (str "alert-" hostname " <alert@ewayops.net>")
                                            :to      to
-                                           :subject (str (str/upper-case (name level)) " "
-                                                         (last (str/split ns #"\.")))
-                                           :body    (str (force msg_)
+                                           :subject (build-subject ns level)
+                                           :body    (str #_ (force msg_)
+                                                         (unwrap vargs)
                                                          "\n\n" {:host           hostname
                                                                  :directory      (System/getProperty "user.dir")
                                                                  :main-namespace ns
@@ -131,66 +125,49 @@
 (defn log-file
    "Returns the path to log file given ns."
   [ns]
-  (let [parts (str/split (str ns) #"\.")]
-    (->> ["var" "log"
-          parts
-          "current.log"]
-         flatten
-         (apply io/file)
-         str)))
+  (-> ns
+      path/ns->path
+      (path/sibling "log")))
 #_ (log-file *ns*)
 
 (defn file-appender
   [ns]
+  (prn "ns" ns "log-file" (log-file ns))
   (merge (rolling-appender {:path (log-file ns)
                             :pattern :daily})
          #_{:output-fn no-color-output}))
 
-(defrecord Log [flags ns config]
+(defrecord Log [config]
   component/Lifecycle
   (start [this]
-    (info :log/start)
-    (let [d (set/difference flags #{:file :email :console})]
-      (when-not (empty? d)
-        (t/warn "Unknown flag(s)" d)))
-    (t/set-config! base-config)
-    (when (:file flags)
-      (t/merge-config! {:appenders
-                        {:file (file-appender ns)}}))
-    (when (:email flags)
-      (t/merge-config! {:appenders
-                        {:email (email-appender ns
-                                                {:to "jon@ewayops.net"
-                                                 :host "mx.ewaydirect.com"})}}))
-    (when (or (:console flags)
-              (empty? flags))
-      (t/merge-config! {:appenders
-                        {:console console-appender}}))
-    (when config
-      (t/merge-config! config))
-    (info :log/started this)
+    (let [{:keys [loggers main-ns]} config]
+
+      (t/set-config! base-config)
+      (prn "loggers" loggers)
+      (when (:file loggers)
+        (t/merge-config! {:appenders
+                          {:file (file-appender main-ns)}}))
+      (when (:email loggers)
+        (t/merge-config! {:appenders
+                          {:email (email-appender main-ns
+                                                  {:to   (get-in config [:alert :mail])
+                                                   :host (get-in config [:mail :relay])})}}))
+      (when (or (:console loggers)
+                (empty? loggers))
+        (t/merge-config! {:appenders
+                          {:console console-appender}})))
     this)
 
   (stop [this]
-    (info :log/stop flags)
     (t/set-config! (merge base-config
                           console-appender))
-    (assoc this :flags nil)))
+    this))
 
 (defmacro component
   "Creates a default logging component from the passed flags."
   [flags]
   `(->Log ~flags (str ~*ns*) {}))
 
-(comment
-  (def log
-    (->Log #{:console} "eway.site.24114.subscriber-response" {}))
-  (let [log (component #{:console})]
-    (.start log)
-    ;;(.stop log)
-    (t/error "test 35"))
-)
-
-(defmacro init!
-  [flags]
-  `(.start (->Log ~flags (str ~*ns*) {})))
+(defn init*
+  [config]
+  (.start (->Log config)))

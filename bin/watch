@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Automatically runs tests when source files change.
+bin/kaocha --watch

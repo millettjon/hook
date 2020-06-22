@@ -4,10 +4,16 @@
 PROJECT_HOME="$(cd $(dirname $BASH_SOURCE); pwd)"
 cd $PROJECT_HOME
 
+# TODO: Auto determine this?
+#   -? Can this be a symlink?
+#   -? Add explicit links for dev vs prod?
+# run-dev
+# run-prod
+
 # Build argument list.
 CMD=(clojure
     --main
-    eway.site.11214.subscriber-response-hook)
+    eway.site.11214.subscriber-response-hook.cli)
 
 # Configure profile (prod or dev)
 #export EWAY_PROFILE=dev

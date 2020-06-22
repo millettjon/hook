@@ -4,7 +4,7 @@
 ;; - https://clojure.org/reference/deps_and_cli
 ;; - https://github.com/seancorfield/dot-clojure
 ;;
-{:paths ["src"]
+{:paths ["."]
  :deps  {org.clojure/clojure {:mvn/version "1.10.1"}
 
          ;; building systems from components
@@ -27,7 +27,7 @@
          yesql                   {:mvn/version "0.5.3"}
 
          ;; other
-         io.forward/yaml       {:mvn/version "1.0.10"}       ; read/write yaml
+         aero                  {:mvn/version "1.1.6"}        ; configuration
          diehard               {:mvn/version "0.10.0"}       ; retries and rate limits
          clj-http              {:mvn/version "3.10.1"}       ; http client
          fipp                  {:mvn/version "0.6.23"}       ; pretty printer
@@ -35,13 +35,13 @@
          tick                  {:mvn/version "0.4.23-alpha"} ; time
          clansi                {:mvn/version "1.0.0"}        ; ansi colors
          toyokumo/tarayo       {:mvn/version "0.2.2"}        ; send email
+         cli-matic             {:mvn/version "0.4.3"}        ; command line
          }
 
  :aliases {:run {:main-opts ["-m" "eway.site.11214.subscriber-response-hook"]}
 
            ;; common test deps
-           :test {:extra-paths ["test"]
-                  :extra-deps  {clj-http-fake {:mvn/version "1.0.3"}}}
+           :test {:extra-deps {clj-http-fake {:mvn/version "1.0.3"}}}
 
            ;; development repl
            :nrepl {:extra-deps {nrepl             {:mvn/version "0.7.0"}
@@ -49,21 +49,12 @@
                    :main-opts  ["-m" "nrepl.cmdline" "--middleware" "[\"cider.nrepl/cider-middleware\"]"]}
 
            ;; auto run tests when files change
-           :watch {:extra-deps {lambdaisland/kaocha {:mvn/version "1.0.632"}}
-                   :main-opts  ["-m" "kaocha.runner" "--watch"]}
+           :kaocha {:extra-deps {lambdaisland/kaocha {:mvn/version "1.0.632"}}
+                    :main-opts  ["-m" "kaocha.runner"]}
 
            ;; test coverage report
            :cloverage {:extra-deps {cloverage {:mvn/version "1.1.2"}}
                        :main-opts  ["-m" "cloverage.coverage" "-p" "src" "-s" "test"]}
-
-           ;; linter
-           :eastwood {:main-opts  ["-m" "eastwood.lint" "{:source-paths [\"src\"]},{:test-paths [\"test\"]}"]
-                      :extra-deps {jonase/eastwood {:mvn/version "0.3.11"}}}
-
-           ;; - see https://github.com/hugoduncan/criterium/
-           ;; - (require '[criterium.core :refer [bench]])
-           ;; - (bench (your-expression))
-           :bench {:extra-deps {criterium {:mvn/version "RELEASE"}}}
 
            ;; list outdated dependencies
            ;; Note: See wrapper bin/outdated which works around a bug in --every.

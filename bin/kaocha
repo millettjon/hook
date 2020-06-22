@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# Run kaocha test runner.
+
+# --watch
+# --print-config
+
+clojure -A:test:kaocha "$@"

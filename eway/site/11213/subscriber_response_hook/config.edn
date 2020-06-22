@@ -1,0 +1,2 @@
+{:alert {:mail "jon@ewayops.net" :pager nil}
+ :loggers #{:console :file :email}}

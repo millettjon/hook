@@ -1,0 +1,39 @@
+#!/bin/bash
+
+# Calculate project home.
+export PROJECT_HOME="$(cd $(dirname $(readlink -f $BASH_SOURCE)); git rev-parse --show-toplevel)"
+export JOB_HOME="$(cd $(dirname "${BASH_SOURCE}"); pwd)"
+#echo PROJECT_HOME=$PROJECT_HOME
+#echo JOB_HOME=$JOB_HOME
+
+# Always run from top level of project.
+cd $PROJECT_HOME
+
+# Calculate clojure main namespace.
+function get_namespace {
+    # Turn job home into relative path.
+    local s="${JOB_HOME#"${PROJECT_HOME}/"}"
+    s="${s//\//.}"  # convert / to .
+    s="${s//_/-}"   # convert _ to -
+    s="${s}.cli"    # append cli
+    echo $s
+}
+NAMESPACE="$(get_namespace)"
+
+# Build argument list.
+CMD=(clojure
+     -J-Xms256m
+     -J-Xmx256m
+     #-J-Xms512m
+     #-J-Xmx512m
+     #-J-client
+    --main $NAMESPACE
+    "$@")
+
+# Configure profile (prod or dev)
+#export EWAY_PROFILE="${EWAY_PROFILE:-dev}"
+export EWAY_PROFILE="${EWAY_PROFILE:-prod}"
+#export EWAY_PROFILE=prod
+
+# Run using nix-shell
+nix-shell --run "${CMD[*]}"

@@ -1,0 +1,60 @@
+20-06-20 19:20:28 cloud1 INFO [eway.site.11214.subscriber-response-hook.core:14] - :processing
+20-06-20 19:20:28 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.core], :code 0}
+20-06-20 19:20:53 cloud1 INFO [eway.app:9] - :start {:ns #namespace[eway.site.11214.subscriber-response-hook.core]}
+20-06-20 19:20:53 cloud1 INFO [eway.app:12] - :load-config {:alert {:mail "jon@ewayops.net", :pager nil}, :loggers #{:email :file :console}, :mail {:relay "mx-ops"}, :db {:host "192.168.30.140", :name "EWAYP1"}}
+20-06-20 19:20:53 cloud1 INFO [eway.site.11214.subscriber-response-hook.core:14] - :processing
+20-06-20 19:20:53 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:15] - :fubar
+20-06-20 19:20:53 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.core], :code 0}
+20-06-20 19:30:44 cloud1 INFO [eway.app:9] - :start {:ns #namespace[eway.site.11214.subscriber-response-hook.core]}
+20-06-20 19:30:44 cloud1 INFO [eway.app:12] - :load-config {:alert {:mail "jon@ewayops.net", :pager nil}, :loggers #{:email :file :console}, :mail {:relay "mx-ops"}, :db {:host "192.168.30.140", :name "EWAYP1"}}
+20-06-20 19:30:44 cloud1 INFO [eway.site.11214.subscriber-response-hook.core:14] - :processing
+20-06-20 19:30:44 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:15] - :fubar
+20-06-20 19:30:44 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.core], :code 0}
+20-06-20 19:32:00 cloud1 INFO [eway.app:9] - :start {:ns #namespace[eway.site.11214.subscriber-response-hook.core]}
+20-06-20 19:32:00 cloud1 INFO [eway.app:12] - :load-config {:alert {:mail "jon@ewayops.net", :pager nil}, :loggers #{:email :file :console}, :mail {:relay "mx-ops"}, :db {:host "192.168.30.140", :name "EWAYP1"}}
+20-06-20 19:32:00 cloud1 INFO [eway.site.11214.subscriber-response-hook.core:14] - :processing
+20-06-20 19:32:00 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:16] - :foo clojure.lang.ExceptionInfo: foo {:foo :fubar}
+20-06-20 19:32:00 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.core], :code 0}
+20-06-20 19:33:44 cloud1 INFO [eway.app:9] - :start {:ns #namespace[eway.site.11214.subscriber-response-hook.core]}
+20-06-20 19:33:44 cloud1 INFO [eway.app:12] - :load-config {:alert {:mail "jon@ewayops.net", :pager nil}, :loggers #{:email :file :console}, :mail {:relay "mx-ops"}, :db {:host "192.168.30.140", :name "EWAYP1"}}
+20-06-20 19:33:44 cloud1 INFO [eway.site.11214.subscriber-response-hook.core:14] - :processing
+20-06-20 19:33:44 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:16] - :foo clojure.lang.ExceptionInfo: foo {:foo :fubar}
+20-06-20 19:33:44 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.core], :code 0}
+20-06-20 19:35:23 cloud1 INFO [eway.app:9] - :start {:ns #namespace[eway.site.11214.subscriber-response-hook.core]}
+20-06-20 19:35:23 cloud1 INFO [eway.app:12] - :load-config {:alert {:mail "jon@ewayops.net", :pager nil}, :loggers #{:email :file :console}, :mail {:relay "mx-ops"}, :db {:host "192.168.30.140", :name "EWAYP1"}}
+20-06-20 19:35:23 cloud1 INFO [eway.site.11214.subscriber-response-hook.core:14] - :processing
+20-06-20 19:35:23 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:16] - :foo clojure.lang.ExceptionInfo: foo {:foo :fubar}
+20-06-20 19:35:23 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.core], :code 0}
+20-06-20 19:40:00 cloud1 INFO [eway.app:9] - :start {:ns #namespace[eway.site.11214.subscriber-response-hook.core]}
+20-06-20 19:40:00 cloud1 INFO [eway.app:12] - :load-config {:alert {:mail "jon@ewayops.net", :pager nil}, :loggers #{:email :file :console}, :mail {:relay "mx-ops"}, :db {:host "192.168.30.140", :name "EWAYP1"}}
+20-06-20 19:40:00 cloud1 INFO [eway.site.11214.subscriber-response-hook.core:14] - :processing
+20-06-20 19:40:00 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:16] - :foo clojure.lang.ExceptionInfo: foo {:foo :fubar}
+20-06-20 19:40:00 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.core], :code 0}
+20-06-20 19:41:36 cloud1 INFO [eway.app:9] - :start {:ns #namespace[eway.site.11214.subscriber-response-hook.core]}
+20-06-20 19:41:36 cloud1 INFO [eway.app:12] - :load-config {:alert {:mail "jon@ewayops.net", :pager nil}, :loggers #{:email :file :console}, :mail {:relay "mx-ops"}, :db {:host "192.168.30.140", :name "EWAYP1"}}
+20-06-20 19:41:36 cloud1 INFO [eway.site.11214.subscriber-response-hook.core:14] - :processing
+20-06-20 19:41:36 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:15] - something
+20-06-20 19:41:36 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:16] - :foo clojure.lang.ExceptionInfo: foo {:foo :fubar}
+20-06-20 19:41:36 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.core], :code 0}
+20-06-20 19:43:37 cloud1 INFO [eway.app:9] - :start {:ns #namespace[eway.site.11214.subscriber-response-hook.core]}
+20-06-20 19:43:37 cloud1 INFO [eway.app:12] - :load-config {:alert {:mail "jon@ewayops.net", :pager nil}, :loggers #{:email :file :console}, :mail {:relay "mx-ops"}, :db {:host "192.168.30.140", :name "EWAYP1"}}
+20-06-20 19:43:37 cloud1 INFO [eway.site.11214.subscriber-response-hook.core:14] - :processing
+20-06-20 19:43:37 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:15] - something
+20-06-20 19:43:37 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:16] - :foo clojure.lang.ExceptionInfo: foo {:foo :fubar}
+20-06-20 19:43:37 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.core], :code 0}
+20-06-20 19:44:25 cloud1 INFO [eway.app:9] - :start {:ns #namespace[eway.site.11214.subscriber-response-hook.core]}
+20-06-20 19:44:25 cloud1 INFO [eway.app:12] - :load-config {:alert {:mail "jon@ewayops.net", :pager nil}, :loggers #{:email :file :console}, :mail {:relay "mx-ops"}, :db {:host "192.168.30.140", :name "EWAYP1"}}
+20-06-20 19:44:25 cloud1 INFO [eway.site.11214.subscriber-response-hook.core:14] - :processing
+20-06-20 19:44:25 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:15] - something
+20-06-20 19:44:25 cloud1 WARN [eway.site.11214.subscriber-response-hook.core:16] - :foo clojure.lang.ExceptionInfo: foo {:foo :fubar}
+20-06-20 19:44:25 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.core], :code 0}
+20-06-20 19:53:52 cloud1 INFO [eway.app:9] - :start {:ns #namespace[eway.site.11214.subscriber-response-hook.cli]}
+20-06-20 19:53:52 cloud1 INFO [eway.app:12] - :load-config {:alert {:mail "jon@ewayops.net", :pager nil}, :loggers #{:email :file :console}, :mail {:relay "mx-ops"}, :db {:host "192.168.30.140", :name "EWAYP1"}}
+20-06-20 19:53:52 cloud1 INFO [eway.site.11214.subscriber-response-hook.cli:14] - :processing
+20-06-20 19:53:52 cloud1 INFO [eway.app:21] - :exit {:ns #namespace[eway.site.11214.subscriber-response-hook.cli], :code 0}
+20-06-21 01:03:20 cloud1 INFO [eway.riak:46] - :eway.riak/component :start {:flags {:endpoints ["cloud1" "cloud2" "cloud3" "cloud4" "cloud5"], :bucket-postfix "-test"}, :ns "eway.client.jondo.hook.subscriber-response"}
+20-06-21 01:37:07 cloud1 INFO [eway.config:12] - :using-profile :dev
+20-06-21 01:37:11 cloud1 INFO [eway.config:12] - :using-profile :dev
+20-06-21 01:38:57 cloud1 INFO [eway.config:12] - :using-profile :dev
+20-06-21 01:39:42 cloud1 INFO [eway.riak:46] - :eway.riak/component :start {:flags {:endpoints ["cloud1" "cloud2" "cloud3" "cloud4" "cloud5"]}, :ns "eway.client.jondo.hook.subscriber-response"}
+20-06-21 02:15:00 cloud1 INFO [eway.config:12] - :using-profile :dev
