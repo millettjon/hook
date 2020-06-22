@@ -1,0 +1,26 @@
+# -*- crontab -*-
+# {{comment}}
+#
+# Crontab
+#
+# Note: This is a system crontab which takes user to run as as the 5th field.
+# See: https://help.ubuntu.com/community/CronHowto
+#
+# --------------------------------------------------
+# *  *  *  *  *  user command
+# -  -  -  -  -
+# |  |  |  |  |
+# |  |  |  |  +--------- day of week (0 - 6) (Sunday=0)
+# |  |  |  +---------- month (1 - 12)
+# |  |  +----------- day of month (1 - 31)
+# |  +------------ hour (0 - 23)
+# +------------- min (0 - 59)
+#
+# --------------------------------------------------
+
+EWAY_HOME=/opt/eway
+PATH=/usr/local/rbenv/shims:/usr/bin:/bin:/opt/eway/bin
+
+# --------------------------------------------------
+# CuteKid
+23,53 * * * * admin {{home}}/eway/site/11213/subscriber_response_hook/run process

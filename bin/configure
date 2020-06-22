@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Configures this project.
+# Keep actions idempotent so that re-running won't break things.
+
+# Change to the project root directory.
+PROJECT_HOME="$(cd $(dirname $BASH_SOURCE)/..; pwd)"
+cd $PROJECT_HOME
+
+# Make sure submodule dependencies are installed.
+git submodule init
+git submodule update
+
+# Source bootstrap utilities.
+source "$(dirname $BASH_SOURCE)/../opt/bootstrap/bootstrap.bash"
+
+# Install crontab.
+render etc/crontab.mustache /etc/cron.d/jobs "{home: '$PROJECT_HOME'}"
