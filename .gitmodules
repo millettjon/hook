@@ -1,0 +1,3 @@
+[submodule "opt/bootstrap"]
+	path = opt/bootstrap
+	url = git@git:bootstrap
