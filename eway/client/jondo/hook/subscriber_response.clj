@@ -201,10 +201,10 @@
    :subcommands [{:command "status"
                   :description "Show status of riak id, lock, and db id."
                   :runs (cli-fn (fn [_] (pprint (status config))))}
-                 #_ {:command "set-start-id"
+                 {:command "set-start-id"
                   :description "Set starting subscriber response id for next query."
                   :runs (cli-fn (fn [{:keys [id]}]
-                                  (set-id config) id))
+                                  (set-id config id)))
                   :opts [{:option "id" :short 0 :as "subscriber response id" :type :int :default :present}]}
                  #_ {:command "clear-lock"
                   :description "Clear stuck lock. Useful after abnormal process termination."
