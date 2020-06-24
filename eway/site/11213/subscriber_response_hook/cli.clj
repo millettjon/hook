@@ -1,14 +1,11 @@
 (ns eway.site.11213.subscriber-response-hook.cli
   "Queries new subscriber responses for site 11213 (Canvaspeople) and
   calls the Jondo webhook for each."
-  (:require [fipp.edn :refer [pprint]]
-            [taoensso.timbre :refer [info warn]]
-            [eway.app :as app]
+  (:require [taoensso.timbre :refer [info]]
             [eway.log :as el]
             [eway.config :refer [read-config]]
             [cli-matic.core :as cli]
-            [eway.client.jondo.hook.subscriber-response :as hook])
-  (:gen-class))
+            [eway.client.jondo.hook.subscriber-response :as hook]))
 
 ;; CuteKid Template:
 ;; https://sp.canvaspeople.com/i?e=se&p=srv&tv=no-js&se_ca=lead&se_ac={{ action }}&se_la={{ email }}&se_pr=subid-{{ text17 }}|rti-{{ rti }}&aid=ck_lead_tracker_eway
@@ -51,4 +48,4 @@
     #_ (hook/max-subscriber-response-id)
     #_ (hook/set-id (eway.config/read-config) 42)
     )
-)
+  )
