@@ -54,7 +54,12 @@
 
            ;; test coverage report
            :cloverage {:extra-deps {cloverage {:mvn/version "1.1.2"}}
-                       :main-opts  ["-m" "cloverage.coverage" "-p" "src" "-s" "test"]}
+                       :main-opts  ["-m" "cloverage.coverage"
+                                    "-p" "src"
+                                    "-s" "test"
+                                    "--ns-regex" ".*"
+                                    "--ns-exclude-regex" ".*-test"
+                                    "--test-ns-regex" ".*-test"]}
 
            ;; list outdated dependencies
            ;; Note: See wrapper bin/outdated which works around a bug in --every.
