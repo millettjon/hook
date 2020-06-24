@@ -2,20 +2,16 @@
 ** TODO Add a wiki page.
 ** TODO Print docs when entering nix-shell
 BART JOBS
-** TODO Get Cute Kid working.
-** TODO Use aero for configuration.
-** TODO Factor out common code to Jondo.
-** TODO Add singleton lock to prevent simultaneous runs.
 ** TODO Add simple retry ability.
 ** TODO Add better rate throttling.
 ** TODO Review riak persistance settings and decide if they need tweaked.
 ** TODO Add a pager alert if falling too far behind.
 ** TODO Add a buddy monitor to make sure it is running.
-** TODO Move to nomad.
+** TODO Move to nomad/batch1 batch2
 ** TODO Factor out common eway code into another project.
 ** TODO Get to 80% test coverage.
 ** TODO Get rate throttling working for email logging
-** TODO Load passwords securely (aero?)
+** TODO Load passwords securely.
 ** TODO Use a read only database user.
 ** TODO Log statistics (elapsed time, total rows, average, median, bytes sent)
 ** TODO switch to mu log
